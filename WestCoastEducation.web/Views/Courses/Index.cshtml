@@ -1,7 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Courses";
+    ViewBag.Pagetitle = "Courses";
 }
 
 <div>
-    <h1>Course list</h1>    
+    <h1>Course list</h1>
+    <p>Här kan det ligga en lista över alla kurser.<br>
+        Just nu ligger det bara en placeholder lista så länge.
+    </p>
+    <ul>
+        @foreach (var course in ViewBag.Courses)
+        {
+            <li>@course</li>
+        }
+    </ul>
 </div>

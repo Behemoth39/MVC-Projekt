@@ -1,16 +1,18 @@
-﻿@{
+﻿@model IList<WestCoastEducation.web.Models.Course>
+
+@{
     ViewBag.Pagetitle = "Courses";
 }
 
 <div>
     <h1>Course list</h1>
     <p>Här kan det ligga en lista över alla kurser.<br>
-        Just nu ligger det bara en placeholder lista så länge.
+        Just nu ligger det bara en placeholder lista utan länkar så länge.
     </p>
     <ul>
-        @foreach (var course in ViewBag.Courses)
+        @foreach (var course in Model)
         {
-            <li>@course</li>
+            <li>@course.CourseName</li>
         }
     </ul>
 </div>

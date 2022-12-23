@@ -9,21 +9,23 @@
 </head>
 
 <body>
-
-    <nav class="banner-menu">
-        <div class="banner-menu-links">
-            <div>
-                <a asp-controller="home" asp-action="Index">Home</a>
+    
+    <header>
+        <nav class="banner-menu">
+            <div class="banner-menu-links">
+                <div>
+                    <a asp-controller="home" asp-action="Index">Home</a>
+                </div>
+                <div>
+                    <a asp-controller="courses" asp-action="Index">Courses</a>
+                </div>
             </div>
-            <div>
-                <a asp-controller="courses" asp-action="Index">Courses</a>
+            <div class="site-name">
+                <p>West Coast Education</p>
             </div>
+        </nav>
+    </header>
 
-        </div>
-        <div class="site-name">
-            <p>West Coast Education</p>
-        </div>
-    </nav>
 
     <main>
         @RenderBody()

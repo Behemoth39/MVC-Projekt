@@ -5,14 +5,16 @@
 }
 
 <div>
-    <h1>Course list</h1>
+    <h1>Kurslista</h1>
     <p>Här kan det ligga en lista över alla kurser.<br>
-        Just nu ligger det bara en placeholder lista utan länkar så länge.
+        Just nu ligger det bara en placeholder lista med länkar så länge.
     </p>
     <ul>
         @foreach (var course in Model)
         {
-            <li>@course.CourseName</li>
+            <a asp-action="details" asp-route-courseName="@course.CourseName">
+                <li>@course.CourseName</li>
+            </a>
         }
     </ul>
 </div>

@@ -17,5 +17,11 @@ namespace WestCoastEducation.web.Controllers
 
             return View("Index", courses);
         }
+
+        [Route("course/{courseName}")]
+        public IActionResult Details(Guid courseName)
+        {             
+            return View("course");
+        }
     }
 }

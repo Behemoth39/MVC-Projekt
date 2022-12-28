@@ -1,4 +1,4 @@
-namespace WestCoastEducation.tests;
+namespace WestCoastEducation.Tests;
 
 public class UnitTest1
 {

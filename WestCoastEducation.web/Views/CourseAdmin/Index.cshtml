@@ -1,0 +1,52 @@
+﻿@model IList<WestCoastEducation.web.Models.Course>
+@{
+    Layout = "_LayoutAdmin";
+    ViewBag.Pagetitle = "Admin-panel";
+}
+<section class="page">
+    <h1 class="table-h1">Kurser</h1>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Kurs</th>
+                <th>Kurs Nr</th>
+                <th>Deltagargräns</th>
+                <th>Kursstart</th>
+                <th>Kursslut</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td class="edit-icon">
+                        <a asp-action="Edit" asp-controller=CourseAdmin asp-route-courseId="@course.CourseId">
+                            <i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                    <td>@course.CourseName</td>
+                    <td>@course.CourseNumer</td>
+                    <td class="center">@course.EnrollmentLimit</td>
+                    <td>@course.CourseStart</td>
+                    <td>@course.CourseEnd</td>
+                    <td class="edit-icon">
+                        <a asp-action="Delete" asp-controller=CourseAdmin asp-route-courseId="@course.CourseId">
+                            <i class="fa-solid fa-delete-left"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </tfoot>
+    </table>
+</section>

@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="~/css/styles-admin.css">
     <link rel="stylesheet" href="~/css/banner-menu.css">
+    <link rel="stylesheet" href="~/css/table.css">
     <script src="https://kit.fontawesome.com/1e64290bfc.js" crossorigin="anonymous"></script>
     <title>@ViewBag.Pagetitle - WestCoastEducation</title>
 </head>
@@ -16,15 +17,20 @@
         <nav class="banner-menu">
             <div class="banner-menu-links">
                 <div>
-                    <a asp-controller="home" asp-action="Index">Hem</a>
+                    <a asp-action="Index" asp-controller="Home">Hem</a>
                 </div>
                 <div>
-                    <a asp-controller="courses" asp-action="Index">Kurser</a>
+                    <a asp-action="Index" asp-controller="Admin">Admin</a>
+                </div>
+                <div>
+                    <a asp-action="Index" asp-controller="CourseAdmin">Kurser</a>
+                </div>
+                <div>
+                    <a asp-action="Index" asp-controller="Users">Användare</a>
                 </div>
             </div>
             <div class="banner-site-name">
-                <p>West Coast Education <a asp-action="Index" asp-controller="Admin">
-                        <i class="fa-solid fa-gear"></i></a></p>
+                <p>West Coast Education</p>
             </div>
         </nav>
     </header>

@@ -12,7 +12,7 @@
   font-size: 125%;
 }
 .banner-menu-links > div {
-  width: 90px;
+  padding-left: 25px;
   text-align: center;
   min-width: fit-content;
   margin: auto;

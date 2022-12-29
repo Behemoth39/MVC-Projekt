@@ -12,9 +12,11 @@
     <ul>
         @foreach (var course in Model)
         {
-            <a asp-action="details" asp-route-courseName="@course.CourseName">
-                <li>@course.CourseName</li>
-            </a>
+            <li>
+                <a asp-action="details" asp-route-courseName="@course.CourseName">
+                    @course.CourseName
+                </a>
+            </li>
         }
     </ul>
 </div>

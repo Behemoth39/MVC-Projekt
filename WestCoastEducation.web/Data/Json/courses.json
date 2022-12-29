@@ -1,0 +1,38 @@
+[
+  {
+    "courseId": 1000,
+    "courseName": "Electrician",
+    "courseNumer": "EN2586",
+    "enrollmentLimit": "20",
+    "participantList": "",
+    "courseStart": "2023-02-01",
+    "courseEnd": "2024-12-20"
+  },
+  {
+    "courseId": 2000,
+    "courseName": "Technician",
+    "courseNumer": "TN0089",
+    "enrollmentLimit": "25",
+    "participantList": "",
+    "courseStart": "2022-05-10",
+    "courseEnd": "2024-08-20"
+  },
+  {
+    "courseId": 3000,
+    "courseName": "Mechanic",
+    "courseNumer": "MC1074",
+    "enrollmentLimit": "20",
+    "participantList": "",
+    "courseStart": "2022-03-05",
+    "courseEnd": "2023-11-10"
+  },
+  {
+    "courseId": 4000,
+    "courseName": "Development",
+    "courseNumer": "DT3689",
+    "enrollmentLimit": "30",
+    "participantList": "",
+    "courseStart": "2022-08-10",
+    "courseEnd": "2024-09-22"
+  }
+]

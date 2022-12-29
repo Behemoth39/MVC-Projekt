@@ -1,21 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
-using WestCoastEducation.web.Models;
+using Microsoft.EntityFrameworkCore;
+using WestCoastEducation.web.Data;
 
-namespace WestCoastEducation.web.Controllers
+namespace WestCoastEducation.web.Controllers;
+
+[Route("courses")]
+public class CoursesController : Controller
 {
-    [Route("courses")]
-    public class CoursesController : Controller
-    {      
-        public IActionResult Index()
-        {        
+    private readonly WestCoastEducationContext _context;
+    public CoursesController(WestCoastEducationContext context)
+    {
+        _context = context;
+    }
 
-            return View("Index");
-        }
+    public async Task<IActionResult> Index()
+    {        
+        var courses = await _context.Courses.ToListAsync();
+        return View("Index", courses);
+    }
 
-        [Route("course/{courseName}")]
-        public IActionResult Details()
-        {             
-            return View("course");
-        }
+    [Route("course/{courseName}")]
+    public IActionResult Details(string courseName)
+    {             
+        return View("course");
     }
 }

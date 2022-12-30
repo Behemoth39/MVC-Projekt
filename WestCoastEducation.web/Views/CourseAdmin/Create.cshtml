@@ -1,0 +1,36 @@
+@model WestCoastEducation.web.Models.Course
+@{
+    Layout = "_LayoutAdmin";
+    ViewBag.Pagetitle = "Admin-panel";
+}
+<section class="page">
+    <h1 class="table-h1">Lägg till kurser</h1>
+    <form class="" asp-action="create" asp-controller="CourseAdmin" method="post">
+        <div class="form-control">
+            <label>Kursnamn</label>
+            <input asp-for="CourseName">
+        </div>
+        <div class="form-control">
+            <label>Kursnumer</label>
+            <input asp-for="CourseNumber">
+        </div>
+        <div class="form-control">
+            <label>Deltagargräns</label>
+            <input asp-for="EnrollmentLimit">
+        </div>
+        <div class="form-control">
+            <label>Kursstart</label>
+            <input asp-for="CourseStart">
+        </div>
+        <div class="form-control">
+            <label>Kursslut</label>
+            <input asp-for="CourseEnd">
+        </div>
+        <div class="form-control">
+            <div class="buttons-container">
+                <button type="submit" class="btn-form">Spara</button>
+                <a asp-action="index" asp-controller="CourseAdmin" class="btn-form">Avbryt</a>
+            </div>
+        </div>
+    </form>
+</section>

@@ -51,7 +51,6 @@ tbody > tr:hover {
   cursor: pointer;
   background-color: lightseagreen;    
 }
-
 .table-container {
   display: flex;
   flex-direction: column;

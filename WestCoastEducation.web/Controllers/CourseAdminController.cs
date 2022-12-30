@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WestCoastEducation.web.Data;
+using WestCoastEducation.web.Models;
 
 namespace WestCoastEducation.web.Controllers;
 
@@ -17,5 +18,20 @@ public class CourseAdminController : Controller
     {
         var courses = await _context.Courses.ToListAsync(); 
         return View("Index", courses);
+    }
+
+    [HttpGet("create")]
+     public IActionResult Create()
+    {
+        var course = new Course();
+        return View("Create", course);
+    }
+
+    [HttpPost("create")]
+     public async Task<IActionResult> Create(Course course)
+    {    
+        await _context.Courses.AddAsync(course);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
 }

@@ -1,0 +1,33 @@
+.buttons-container {
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+}
+.btn-table{  
+  display: inline-block;  
+  border: none;
+  border-radius: 10px;
+  margin: 0.3rem 0;
+  width: 100px;  
+  text-align: center;
+  padding: 0.6rem 1rem;  
+  background-color: navy;
+  color: white;
+  text-decoration: none;
+}
+.btn-table:hover {
+  opacity: 0.9;
+  font-weight: bold;
+}
+.btn-form{   
+  display: inline-block;  
+  border: none;
+  border-radius: 10px;
+  margin: 0.3rem 0;
+  width: 100%;  
+  text-align: center;
+  padding: 0.6rem 1rem;  
+  background-color: navy;
+  color: white;
+  text-decoration: none; 
+}

@@ -5,7 +5,7 @@ using WestCoastEducation.web.Models;
 
 namespace WestCoastEducation.web.Controllers;
 
-[Route("courseadmin")]
+[Route("course/admin")]
 public class CourseAdminController : Controller
 {
     private readonly WestCoastEducationContext _context;
@@ -33,5 +33,42 @@ public class CourseAdminController : Controller
         await _context.Courses.AddAsync(course);
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet("edit/{courseId}")]
+     public async Task<IActionResult> Edit(int courseId)
+    {
+        var course = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+        if(course is not null) return View("Edit", course);
+        return Content("Något gick fel!");
+    }
+
+    [HttpPost("edit/{courseId}")]
+     public async Task<IActionResult> Edit(int courseId, Course course)
+    {    
+        var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+        if(courseToUpdate is null) return RedirectToAction(nameof(Index));
+
+        courseToUpdate.CourseName = course.CourseName;
+        courseToUpdate.CourseNumber = course.CourseNumber;
+        courseToUpdate.EnrollmentLimit = course.EnrollmentLimit;
+        courseToUpdate.CourseStart = course.CourseStart;
+        courseToUpdate.CourseEnd = course.CourseEnd;
+
+        _context.Courses.Update(courseToUpdate);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+
+     [Route("delete/{courseId}")]
+     public async Task<IActionResult> Delete(int courseId)
+    {
+        var courseToDelete = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+        if(courseToDelete is  null) return RedirectToAction(nameof(Index));
+
+        _context.Courses.Remove(courseToDelete);
+        await _context.SaveChangesAsync();  
+
+        return RedirectToAction(nameof(Index));      
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WestCoastEducation.web.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Course : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +19,7 @@ namespace WestCoastEducation.web.Data.Migrations
                     CourseName = table.Column<string>(type: "TEXT", nullable: false),
                     CourseNumber = table.Column<string>(type: "TEXT", nullable: false),
                     CourseTitle = table.Column<string>(type: "TEXT", nullable: false),
-                    CourseStart = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    CourseStart = table.Column<string>(type: "TEXT", nullable: false),
                     CourseLenght = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WestCoastEducation.web.Data;
 using WestCoastEducation.web.Models;
+using WestCoastEducation.web.ViewModels;
 
 namespace WestCoastEducation.web.Controllers;
 
@@ -35,16 +36,18 @@ public class CourseAdminController : Controller
     [HttpGet("create")]
      public IActionResult Create()
     {
-        var course = new Course();
+        var course = new CoursePostViewModel();
         return View("Create", course);
     }
 
     [HttpPost("create")]
-     public async Task<IActionResult> Create(Course course)
+     public async Task<IActionResult> Create(CoursePostViewModel course)
     {
         try
         {
-             var exists = _context.Courses.SingleOrDefaultAsync(
+            if(!ModelState.IsValid) return View("Create", course);              
+            
+            var exists = await _context.Courses.SingleOrDefaultAsync(
             c => c.CourseName.Trim().ToLower() == course.CourseName.Trim().ToLower());
 
             if (exists is not null)
@@ -55,7 +58,16 @@ public class CourseAdminController : Controller
                 };
                 return View("_Error", error); 
             }  
-            await _context.Courses.AddAsync(course);
+
+            var courseToAdd = new Course{                
+                CourseName = course.CourseName,
+                CourseNumber = course.CourseNumber, 
+                CourseTitle = course.CourseTitle,   
+                CourseStart = course.CourseStart,
+                CourseLenght = (int)course.CourseLenght! 
+            };
+
+            await _context.Courses.AddAsync(courseToAdd);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));          
         }

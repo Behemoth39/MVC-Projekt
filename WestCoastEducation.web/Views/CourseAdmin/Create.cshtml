@@ -1,4 +1,4 @@
-@model WestCoastEducation.web.Models.Course
+@model WestCoastEducation.web.ViewModels.CoursePostViewModel
 @{
     Layout = "_LayoutAdmin";
     ViewBag.Pagetitle = "Admin-panel";
@@ -9,22 +9,27 @@
         <div class="form-control">
             <label>Kursnamn</label>
             <input asp-for="CourseName">
+            <span class="error" asp-validation-for="CourseName"></span>
         </div>
         <div class="form-control">
             <label>Kursnumer</label>
             <input asp-for="CourseNumber">
+            <span class="error" asp-validation-for="CourseNumber"></span>
         </div>
         <div class="form-control">
             <label>Kurstitel</label>
             <input asp-for="CourseTitle">
+            <span class="error" asp-validation-for="CourseTitle"></span>
         </div>
         <div class="form-control">
             <label>Kursstart</label>
             <input asp-for="CourseStart">
+            <span class="error" asp-validation-for="CourseStart"></span>
         </div>
         <div class="form-control">
             <label>Kurslängd</label>
             <input asp-for="CourseLenght">
+            <span class="error" asp-validation-for="CourseLenght"></span>
         </div>
         <div class="form-control">
             <div class="buttons-container">

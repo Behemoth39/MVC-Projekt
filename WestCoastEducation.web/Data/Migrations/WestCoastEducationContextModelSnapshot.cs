@@ -23,8 +23,8 @@ namespace WestCoastEducation.web.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateOnly>("CourseEnd")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CourseLenght")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CourseName")
                         .IsRequired()
@@ -37,11 +37,7 @@ namespace WestCoastEducation.web.Data.Migrations
                     b.Property<DateOnly>("CourseStart")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EnrollmentLimit")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ParticipantList")
+                    b.Property<string>("CourseTitle")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

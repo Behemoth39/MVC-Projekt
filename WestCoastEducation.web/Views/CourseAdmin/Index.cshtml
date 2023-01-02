@@ -15,9 +15,9 @@
                     <th></th>
                     <th>Kurs</th>
                     <th>Kurs Nr</th>
-                    <th>Deltagargräns</th>
+                    <th>Kurstitel</th>
                     <th>Kursstart</th>
-                    <th>Kursslut</th>
+                    <th>Kurslängd</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,9 +32,9 @@
                         </td>
                         <td>@course.CourseName</td>
                         <td>@course.CourseNumber</td>
-                        <td class="center">@course.EnrollmentLimit</td>
+                        <td class="center">@course.CourseTitle</td>
                         <td>@course.CourseStart</td>
-                        <td>@course.CourseEnd</td>
+                        <td>@course.CourseLenght</td>
                         <td>
                             <a class="delete-icon" asp-action="Delete" asp-controller=CourseAdmin
                             asp-route-courseId="@course.CourseId">

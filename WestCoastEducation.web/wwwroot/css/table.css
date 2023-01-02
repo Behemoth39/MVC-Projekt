@@ -58,11 +58,11 @@ tbody > tr:hover {
   width: 800px;
 }
 .edit-icon {
-  color: var(--edit-icon-color);
+  color: blue;
 }
 
 .delete-icon {
-  color: var(--delete-icon-color);
+  color: blue;
 }
 .table-h1{  
   margin-bottom: 10px;

@@ -1,38 +1,34 @@
 [
   {
-    "courseId": 1000,
+    "courseId": 1001,
     "courseName": "Electrician",
-    "courseNumer": "EN2586",
-    "enrollmentLimit": "20",
-    "participantList": "",
+    "courseNumber": "EN2586",
+    "courseTitle": "EN",
     "courseStart": "2023-02-01",
-    "courseEnd": "2024-12-20"
+    "courseLenght": 20
   },
   {
-    "courseId": 2000,
+    "courseId": 1002,
     "courseName": "Technician",
-    "courseNumer": "TN0089",
-    "enrollmentLimit": "25",
-    "participantList": "",
+    "courseNumber": "TN0089",
+    "courseTitle": "TN",
     "courseStart": "2022-05-10",
-    "courseEnd": "2024-08-20"
+    "courseLenght": 30
   },
   {
-    "courseId": 3000,
+    "courseId": 1003,
     "courseName": "Mechanic",
-    "courseNumer": "MC1074",
-    "enrollmentLimit": "20",
-    "participantList": "",
+    "courseNumber": "MC1074",
+    "courseTitle": "MC",
     "courseStart": "2022-03-05",
-    "courseEnd": "2023-11-10"
+    "courseLenght": 25
   },
   {
-    "courseId": 4000,
+    "courseId": 1004,
     "courseName": "Development",
-    "courseNumer": "DT3689",
-    "enrollmentLimit": "30",
-    "participantList": "",
+    "courseNumber": "DT3689",
+    "courseTitle": "DT",
     "courseStart": "2022-08-10",
-    "courseEnd": "2024-09-22"
+    "courseLenght": 30
   }
 ]

@@ -11,8 +11,8 @@ using WestCoastEducation.web.Data;
 namespace WestCoastEducation.web.Data.Migrations
 {
     [DbContext(typeof(WestCoastEducationContext))]
-    [Migration("20221227145011_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230102121307_Course")]
+    partial class Course
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,25 +26,21 @@ namespace WestCoastEducation.web.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CourseEnd")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CourseLenght")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CourseNumer")
+                    b.Property<string>("CourseNumber")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CourseStart")
+                    b.Property<DateOnly>("CourseStart")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("EnrollmentLimit")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ParticipantList")
+                    b.Property<string>("CourseTitle")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

@@ -16,8 +16,20 @@ public class CourseAdminController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var courses = await _context.Courses.ToListAsync(); 
-        return View("Index", courses);
+        try
+        {
+            var courses = await _context.Courses.ToListAsync(); 
+            return View("Index", courses);
+            
+        }
+        catch (Exception ex)
+        {
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid inläsning!",
+                ErrorMessage = ex.Message
+            };
+            return View("_Error", error);          
+        }
     }
 
     [HttpGet("create")]
@@ -29,46 +41,107 @@ public class CourseAdminController : Controller
 
     [HttpPost("create")]
      public async Task<IActionResult> Create(Course course)
-    {    
-        await _context.Courses.AddAsync(course);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+    {
+        try
+        {
+             var exists = _context.Courses.SingleOrDefaultAsync(
+            c => c.CourseName.Trim().ToLower() == course.CourseName.Trim().ToLower());
+
+            if (exists is not null)
+            {
+                var error = new ErrorModel{
+                ErrorTitle = "Något gick fel!",
+                ErrorMessage = $"Kursen {course.CourseName} existerar redan"
+                };
+                return View("_Error", error); 
+            }  
+            await _context.Courses.AddAsync(course);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));          
+        }
+        catch (Exception ex)
+        {
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid sparande!",
+                ErrorMessage = ex.Message
+            };
+            return View("_Error", error);          
+        }   
+        
     }
 
     [HttpGet("edit/{courseId}")]
      public async Task<IActionResult> Edit(int courseId)
     {
-        var course = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
-        if(course is not null) return View("Edit", course);
-        return Content("Något gick fel!");
+        try
+        {
+            var course = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+            if(course is not null) return View("Edit", course);
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid inläsning av id!",
+                ErrorMessage = $"Kursen med id {courseId} existerar inte"
+            };
+            
+            return View("_Error", error);
+        }
+        catch (Exception ex)
+        {
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid inläsning!",
+                ErrorMessage = ex.Message
+            };
+            return View("_Error", error);          
+        }                   
     }
 
     [HttpPost("edit/{courseId}")]
      public async Task<IActionResult> Edit(int courseId, Course course)
-    {    
-        var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
-        if(courseToUpdate is null) return RedirectToAction(nameof(Index));
+    {  
+        try
+        {
+            var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+            if(courseToUpdate is null) return RedirectToAction(nameof(Index));
 
-        courseToUpdate.CourseName = course.CourseName;
-        courseToUpdate.CourseNumber = course.CourseNumber;
-        courseToUpdate.EnrollmentLimit = course.EnrollmentLimit;
-        courseToUpdate.CourseStart = course.CourseStart;
-        courseToUpdate.CourseEnd = course.CourseEnd;
+            courseToUpdate.CourseName = course.CourseName;
+            courseToUpdate.CourseNumber = course.CourseNumber;
+            courseToUpdate.CourseTitle = course.CourseTitle;
+            courseToUpdate.CourseStart = course.CourseStart;
+            courseToUpdate.CourseLenght = course.CourseLenght;
 
-        _context.Courses.Update(courseToUpdate);
-        await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+            _context.Courses.Update(courseToUpdate);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));            
+        }
+         catch (Exception ex)
+        {
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid Sparande!",
+                ErrorMessage = ex.Message
+            };
+            return View("_Error", error);          
+        }   
     }
 
      [Route("delete/{courseId}")]
      public async Task<IActionResult> Delete(int courseId)
     {
-        var courseToDelete = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
-        if(courseToDelete is  null) return RedirectToAction(nameof(Index));
+        try
+        {
+            var courseToDelete = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+            if(courseToDelete is  null) return RedirectToAction(nameof(Index));
 
-        _context.Courses.Remove(courseToDelete);
-        await _context.SaveChangesAsync();  
+            _context.Courses.Remove(courseToDelete);
+            await _context.SaveChangesAsync();  
 
-        return RedirectToAction(nameof(Index));      
+            return RedirectToAction(nameof(Index));  
+        }
+          catch (Exception ex)
+        {
+            var error = new ErrorModel{
+                ErrorTitle = "Fel vid raderandet!",
+                ErrorMessage = ex.Message
+            };
+            return View("_Error", error);          
+        }             
     }
 }

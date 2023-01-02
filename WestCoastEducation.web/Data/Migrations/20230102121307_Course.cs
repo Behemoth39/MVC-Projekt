@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WestCoastEducation.web.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Course : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,11 +18,10 @@ namespace WestCoastEducation.web.Data.Migrations
                     CourseId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     CourseName = table.Column<string>(type: "TEXT", nullable: false),
-                    CourseNumer = table.Column<string>(type: "TEXT", nullable: false),
-                    EnrollmentLimit = table.Column<string>(type: "TEXT", nullable: false),
-                    ParticipantList = table.Column<string>(type: "TEXT", nullable: false),
-                    CourseStart = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CourseEnd = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    CourseNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseTitle = table.Column<string>(type: "TEXT", nullable: false),
+                    CourseStart = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    CourseLenght = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {

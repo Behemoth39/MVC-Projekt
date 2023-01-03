@@ -1,4 +1,4 @@
-@model WestCoastEducation.web.Models.Course
+@model WestCoastEducation.web.ViewModels.CourseUpdateViewModel
 @{
     Layout = "_LayoutAdmin";
     ViewBag.Pagetitle = "Admin-panel";
@@ -7,24 +7,29 @@
     <h1 class="table-h1">Lägg till kurser</h1>
     <form class="" asp-action="edit" asp-controller="CourseAdmin" asp-route-courseId=@Model.CourseId method="post">
         <div class="form-control">
-            <label>Kursnamn</label>
+            <label asp-for="CourseName"></label>
             <input asp-for="CourseName">
+            <span class="error" asp-validation-for="CourseName"></span>
         </div>
-        <div class="form-control">
-            <label>Kursnumer</label>
+        <di class="form-control">
+            <label asp-for="CourseNumber"></label>
             <input asp-for="CourseNumber">
-        </div>
+            <span class="error" asp-validation-for="CourseNumber"></span>
+        </di v>
         <div class="form-control">
-            <label>Kurstitel</label>
+            <label asp-for="CourseTitle"></label>
             <input asp-for="CourseTitle">
+            <span class="error" asp-validation-for="CourseTitle"></span>
         </div>
         <div class="form-control">
-            <label>Kursstart</label>
+            <label asp-for="CourseStart"></label>
             <input asp-for="CourseStart">
+            <span class="error" asp-validation-for="CourseStart"></span>
         </div>
         <div class="form-control">
-            <label>Kurslängd</label>
+            <label asp-for="CourseLenght"></label>
             <input asp-for="CourseLenght">
+            <span class="error" asp-validation-for="CourseLenght"></span>
         </div>
         <div class="form-control">
             <div class="buttons-container">

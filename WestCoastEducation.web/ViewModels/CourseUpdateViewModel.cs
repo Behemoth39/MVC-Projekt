@@ -2,8 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 namespace WestCoastEducation.web.ViewModels;
 
-public class CoursePostViewModel
+public class CourseUpdateViewModel
 {
+    [Required(ErrorMessage = "Kurs id är obligatoriskt")]
+    public int CourseId { get; set; }
+
     [Required(ErrorMessage = "Kursnamn är obligatoriskt")]
     [DisplayName("Kursnamn")]
     public string CourseName { get; set; } = "";

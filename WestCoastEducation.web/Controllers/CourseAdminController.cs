@@ -19,9 +19,19 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var courses = await _context.Courses.ToListAsync(); 
-            return View("Index", courses);
+            var courses = await _context.Courses.ToListAsync();
             
+            var model = courses.Select(c => new CourseListViewModel
+            {
+                CourseId = c.CourseId,
+                CourseName = c.CourseName,
+                CourseNumber = c.CourseNumber, 
+                CourseTitle = c.CourseTitle,   
+                CourseStart = c.CourseStart,
+                CourseLenght = c.CourseLenght
+            }).ToList();
+            
+            return View("Index", model);            
         }
         catch (Exception ex)
         {
@@ -87,14 +97,30 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var course = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
-            if(course is not null) return View("Edit", course);
-            var error = new ErrorModel{
-                ErrorTitle = "Fel vid inläsning av id!",
-                ErrorMessage = $"Kursen med id {courseId} existerar inte"
-            };
+            var result = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
             
-            return View("_Error", error);
+            if(result is null)
+            {
+                var error = new ErrorModel
+                {
+                    ErrorTitle = "Fel vid inläsning av id!",
+                    ErrorMessage = $"Kursen med id {courseId} existerar inte"
+                };
+
+                return View("_Error", error);
+            } 
+
+            var model = new CourseUpdateViewModel
+            {
+                CourseId = result.CourseId,
+                CourseName = result.CourseName,
+                CourseNumber = result.CourseNumber, 
+                CourseTitle = result.CourseTitle,   
+                CourseStart = result.CourseStart,
+                CourseLenght = result.CourseLenght
+            };
+
+            return View("Edit", model);           
         }
         catch (Exception ex)
         {
@@ -107,18 +133,21 @@ public class CourseAdminController : Controller
     }
 
     [HttpPost("edit/{courseId}")]
-     public async Task<IActionResult> Edit(int courseId, Course course)
+     public async Task<IActionResult> Edit(int courseId, CourseUpdateViewModel course)
     {  
         try
         {
+            if(!ModelState.IsValid) return View("Edit", course);
+
             var courseToUpdate = await _context.Courses.SingleOrDefaultAsync(c => c.CourseId == courseId);
+
             if(courseToUpdate is null) return RedirectToAction(nameof(Index));
 
             courseToUpdate.CourseName = course.CourseName;
             courseToUpdate.CourseNumber = course.CourseNumber;
             courseToUpdate.CourseTitle = course.CourseTitle;
             courseToUpdate.CourseStart = course.CourseStart;
-            courseToUpdate.CourseLenght = course.CourseLenght;
+            courseToUpdate.CourseLenght = (int)course.CourseLenght!;
 
             _context.Courses.Update(courseToUpdate);
             await _context.SaveChangesAsync();
@@ -147,7 +176,7 @@ public class CourseAdminController : Controller
 
             return RedirectToAction(nameof(Index));  
         }
-          catch (Exception ex)
+        catch (Exception ex)
         {
             var error = new ErrorModel{
                 ErrorTitle = "Fel vid raderandet!",

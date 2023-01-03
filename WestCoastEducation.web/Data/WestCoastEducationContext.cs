@@ -5,6 +5,7 @@ namespace WestCoastEducation.web.Data;
 
  public class WestCoastEducationContext : DbContext
 {
-    public DbSet<Course> Courses => Set<Course>();
+    public DbSet<CourseModel> Courses => Set<CourseModel>();
+    public DbSet<UserModel> Users => Set<UserModel>();
     public WestCoastEducationContext(DbContextOptions options) : base(options){ }
 }

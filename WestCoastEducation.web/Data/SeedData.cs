@@ -13,7 +13,7 @@ public static class SeedData
 
         if(context.Courses.Any()) return;
         var json = System.IO.File.ReadAllText("Data/Json/courses.json");
-        var courses = JsonSerializer.Deserialize<List<Course>>(json, options);
+        var courses = JsonSerializer.Deserialize<List<CourseModel>>(json, options);
 
         if(courses is not null && courses.Count > 0)
         {

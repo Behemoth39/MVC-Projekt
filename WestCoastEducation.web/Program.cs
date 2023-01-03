@@ -1,12 +1,18 @@
 using Microsoft.EntityFrameworkCore;
 using WestCoastEducation.web.Data;
+using WestCoastEducation.web.Interfaces;
+using WestCoastEducation.web.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add database support
-builder.Services.AddDbContext<WestCoastEducationContext>(options => 
+builder.Services.AddDbContext<WestCoastEducationContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"))
 );
+
+//Add dependency injection
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,9 +29,9 @@ try
     await SeedData.LoadCourseData(context);
 }
 catch (Exception ex)
-{   
+{
     Console.WriteLine("{0} - {1}", ex.Message, ex.InnerException!.Message);
-    throw; 
+    throw;
 }
 
 // Configure the HTTP request pipeline.

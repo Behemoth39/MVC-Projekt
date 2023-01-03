@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace WestCoastEducation.web.Models;
 
-public class Course
+public class CourseModel
 {
+    [Key]
     public int CourseId { get; set; }
     public string CourseName { get; set; } = "";
     public string CourseNumber { get; set; } = "";

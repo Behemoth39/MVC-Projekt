@@ -13,38 +13,70 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public Task<bool> AddAsync(UserModel user)
+    public async Task<bool> AddAsync(UserModel user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _context.Users.AddAsync(user);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public Task<bool> DeleteAsync(UserModel user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Users.Remove(user);
+            return Task.FromResult(true);
+        }
+        catch
+        {
+            return Task.FromResult(false);
+        }
     }
 
-    public Task<UserModel?> FindByIdAsync(int id)
+    public async Task<UserModel?> FindByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Users.FindAsync(id);
     }
 
-    public Task<UserModel?> FindByUserNameAsync(string UserName)
+    public async Task<UserModel?> FindByUserNameAsync(string userName)
     {
-        throw new NotImplementedException();
+        return await _context.Users.SingleOrDefaultAsync(c => c.UserName.Trim().ToLower() == userName.Trim().ToLower());
     }
 
-    public Task<IList<UserModel>> ListAllAsync()
+    public async Task<IList<UserModel>> ListAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Users.ToListAsync();
     }
 
-    public Task<bool> SaveAsync()
+    public async Task<bool> SaveAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (await _context.SaveChangesAsync() > 0) return true;
+            return false;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     public Task<bool> UpdateAsync(UserModel user)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _context.Users.Update(user);
+            return Task.FromResult(true);
+        }
+        catch
+        {
+            return Task.FromResult(false);
+        }
     }
 }

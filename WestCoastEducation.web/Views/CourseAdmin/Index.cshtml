@@ -1,7 +1,7 @@
 ﻿@model IList<WestCoastEducation.web.ViewModels.CourseListViewModel>
 @{
     Layout = "_LayoutAdmin";
-    ViewBag.Pagetitle = "Admin-panel";
+    ViewBag.Pagetitle = "Course Admin";
 }
 <section class="page">
     <h1 class="table-h1">Kurser</h1>
@@ -32,7 +32,7 @@
                         </td>
                         <td>@course.CourseName</td>
                         <td>@course.CourseNumber</td>
-                        <td class="center">@course.CourseTitle</td>
+                        <td>@course.CourseTitle</td>
                         <td>@course.CourseStart</td>
                         <td>@course.CourseLenght</td>
                         <td>

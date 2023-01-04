@@ -127,7 +127,7 @@ public class CourseAdminController : Controller
                 return View("_Error", error);
             }
 
-            var model = new CourseUpdateViewModel
+            var courseToUpdate = new CourseUpdateViewModel
             {
                 CourseId = result.CourseId,
                 CourseName = result.CourseName,
@@ -137,7 +137,7 @@ public class CourseAdminController : Controller
                 CourseLenght = result.CourseLenght
             };
 
-            return View("Edit", model);
+            return View("Edit", courseToUpdate);
         }
         catch (Exception ex)
         {

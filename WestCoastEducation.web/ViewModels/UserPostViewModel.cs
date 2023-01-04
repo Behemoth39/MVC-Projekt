@@ -5,7 +5,7 @@ namespace WestCoastEducation.web.ViewModels;
 
 public class UserPostViewModel
 {
-    [Required(ErrorMessage = "Kursnamn är obligatoriskt")]
+    [Required(ErrorMessage = "Användarnamn är obligatoriskt")]
     [DisplayName("Användarnamn")]
     public string UserName { get; set; } = "";
 
@@ -26,10 +26,10 @@ public class UserPostViewModel
     public string Phone { get; set; } = "";
 
     [Required(ErrorMessage = "Lösenord är obligatoriskt")]
-    [DisplayName("Lösenord")]
+    [DisplayName("Temporärt lösenord")]
     public string Password { get; set; } = "";
 
     [Required(ErrorMessage = "kontotyp är obligatoriskt")]
-    [DisplayName("Konto")]
+    [DisplayName("Kontotyp")]
     public string TypeOfUser { get; set; } = "";
 }

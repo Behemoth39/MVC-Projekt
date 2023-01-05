@@ -8,19 +8,18 @@ namespace WestCoastEducation.web.Controllers;
 [Route("users/admin")]
 public class UsersAdminController : Controller
 {
-    private readonly IUserRepository _repo;
-    public IRepository<UserModel> _genericRepo { get; }
-    public UsersAdminController(IRepository<UserModel> genericRepo, IUserRepository repo)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public UsersAdminController(IUnitOfWork unitOfWork)
     {
-        _genericRepo = genericRepo;
-        _repo = repo;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IActionResult> Index()
     {
         try
         {
-            var user = await _genericRepo.ListAllAsync();
+            var user = await _unitOfWork.UserRepository.ListAllAsync();
             var model = user.Select(u => new UserListViewModel
             {
                 UserId = u.UserId,
@@ -60,7 +59,7 @@ public class UsersAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Create", user);
 
-            if (await _repo.FindByUserNameAsync(user.UserName) is not null)
+            if (await _unitOfWork.UserRepository.FindByUserNameAsync(user.UserName) is not null)
             {
                 var error = new ErrorModel
                 {
@@ -81,9 +80,9 @@ public class UsersAdminController : Controller
                 TypeOfUser = user.TypeOfUser
             };
 
-            if (await _genericRepo.AddAsync(userToAdd))
+            if (await _unitOfWork.UserRepository.AddAsync(userToAdd))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -114,7 +113,7 @@ public class UsersAdminController : Controller
     {
         try
         {
-            var result = await _genericRepo.FindByIdAsync(userId);
+            var result = await _unitOfWork.UserRepository.FindByIdAsync(userId);
 
             if (result is null)
             {
@@ -160,7 +159,7 @@ public class UsersAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Edit", user);
 
-            var userToUpdate = await _genericRepo.FindByIdAsync(userId);
+            var userToUpdate = await _unitOfWork.UserRepository.FindByIdAsync(userId);
 
             if (userToUpdate is null) return RedirectToAction(nameof(Index));
 
@@ -172,9 +171,9 @@ public class UsersAdminController : Controller
             userToUpdate.Password = user.Password;
             userToUpdate.TypeOfUser = user.TypeOfUser;
 
-            if (await _genericRepo.UpdateAsync(userToUpdate))
+            if (await _unitOfWork.UserRepository.UpdateAsync(userToUpdate))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -205,13 +204,13 @@ public class UsersAdminController : Controller
     {
         try
         {
-            var userToDelete = await _genericRepo.FindByIdAsync(userId);
+            var userToDelete = await _unitOfWork.UserRepository.FindByIdAsync(userId);
 
             if (userToDelete is null) return RedirectToAction(nameof(Index));
 
-            if (await _genericRepo.DeleteAsync(userToDelete))
+            if (await _unitOfWork.UserRepository.DeleteAsync(userToDelete))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }

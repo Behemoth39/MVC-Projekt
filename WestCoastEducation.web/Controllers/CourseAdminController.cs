@@ -8,19 +8,18 @@ namespace WestCoastEducation.web.Controllers;
 [Route("course/admin")]
 public class CourseAdminController : Controller
 {
-    private readonly ICourseRepository _repo;
-    public IRepository<CourseModel> _genericRepo { get; }
-    public CourseAdminController(IRepository<CourseModel> genericRepo, ICourseRepository repo)
+    private readonly IUnitOfWork _unitOfWork;
+
+    public CourseAdminController(IUnitOfWork unitOfWork)
     {
-        _genericRepo = genericRepo;
-        _repo = repo;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IActionResult> Index()
     {
         try
         {
-            var courses = await _genericRepo.ListAllAsync();
+            var courses = await _unitOfWork.CourseRepository.ListAllAsync();
 
             var model = courses.Select(c => new CourseListViewModel
             {
@@ -60,7 +59,7 @@ public class CourseAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Create", course);
 
-            var exists = await _repo.FindByCourseNameAsync(course.CourseName);
+            var exists = await _unitOfWork.CourseRepository.FindByCourseNameAsync(course.CourseName);
 
             if (exists is not null)
             {
@@ -81,9 +80,9 @@ public class CourseAdminController : Controller
                 CourseLenght = (int)course.CourseLenght!
             };
 
-            if (await _genericRepo.AddAsync(courseToAdd))
+            if (await _unitOfWork.CourseRepository.AddAsync(courseToAdd))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -114,7 +113,7 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var result = await _genericRepo.FindByIdAsync(courseId);
+            var result = await _unitOfWork.CourseRepository.FindByIdAsync(courseId);
 
             if (result is null)
             {
@@ -158,7 +157,7 @@ public class CourseAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Edit", course);
 
-            var courseToUpdate = await _genericRepo.FindByIdAsync(courseId);
+            var courseToUpdate = await _unitOfWork.CourseRepository.FindByIdAsync(courseId);
 
             if (courseToUpdate is null) return RedirectToAction(nameof(Index));
 
@@ -168,9 +167,9 @@ public class CourseAdminController : Controller
             courseToUpdate.CourseStart = course.CourseStart;
             courseToUpdate.CourseLenght = (int)course.CourseLenght!;
 
-            if (await _genericRepo.UpdateAsync(courseToUpdate))
+            if (await _unitOfWork.CourseRepository.UpdateAsync(courseToUpdate))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -201,13 +200,13 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var courseToDelete = await _genericRepo.FindByIdAsync(courseId);
+            var courseToDelete = await _unitOfWork.CourseRepository.FindByIdAsync(courseId);
 
             if (courseToDelete is null) return RedirectToAction(nameof(Index));
 
-            if (await _genericRepo.DeleteAsync(courseToDelete))
+            if (await _unitOfWork.CourseRepository.DeleteAsync(courseToDelete))
             {
-                if (await _genericRepo.SaveAsync())
+                if (await _unitOfWork.Complete())
                 {
                     return RedirectToAction(nameof(Index));
                 }

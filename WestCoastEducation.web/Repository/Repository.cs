@@ -50,19 +50,6 @@ public class Repository<T> : IRepository<T> where T : class
         return await _entity.ToListAsync();
     }
 
-    public async Task<bool> SaveAsync()
-    {
-        try
-        {
-            if (await _context.SaveChangesAsync() > 0) return true;
-            return false;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-
     public Task<bool> UpdateAsync(T entity)
     {
         try

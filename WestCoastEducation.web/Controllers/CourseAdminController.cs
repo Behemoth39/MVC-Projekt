@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WestCoastEducation.web.Data;
 using WestCoastEducation.web.Interfaces;
 using WestCoastEducation.web.Models;
 using WestCoastEducation.web.ViewModels;
@@ -11,8 +9,10 @@ namespace WestCoastEducation.web.Controllers;
 public class CourseAdminController : Controller
 {
     private readonly ICourseRepository _repo;
-    public CourseAdminController(ICourseRepository repo)
+    public IRepository<CourseModel> _genericRepo { get; }
+    public CourseAdminController(IRepository<CourseModel> genericRepo, ICourseRepository repo)
     {
+        _genericRepo = genericRepo;
         _repo = repo;
     }
 
@@ -20,7 +20,7 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var courses = await _repo.ListAllAsync();
+            var courses = await _genericRepo.ListAllAsync();
 
             var model = courses.Select(c => new CourseListViewModel
             {
@@ -81,9 +81,9 @@ public class CourseAdminController : Controller
                 CourseLenght = (int)course.CourseLenght!
             };
 
-            if (await _repo.AddAsync(courseToAdd))
+            if (await _genericRepo.AddAsync(courseToAdd))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -114,7 +114,7 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var result = await _repo.FindByIdAsync(courseId);
+            var result = await _genericRepo.FindByIdAsync(courseId);
 
             if (result is null)
             {
@@ -158,7 +158,7 @@ public class CourseAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Edit", course);
 
-            var courseToUpdate = await _repo.FindByIdAsync(courseId);
+            var courseToUpdate = await _genericRepo.FindByIdAsync(courseId);
 
             if (courseToUpdate is null) return RedirectToAction(nameof(Index));
 
@@ -168,9 +168,9 @@ public class CourseAdminController : Controller
             courseToUpdate.CourseStart = course.CourseStart;
             courseToUpdate.CourseLenght = (int)course.CourseLenght!;
 
-            if (await _repo.UpdateAsync(courseToUpdate))
+            if (await _genericRepo.UpdateAsync(courseToUpdate))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -201,13 +201,13 @@ public class CourseAdminController : Controller
     {
         try
         {
-            var courseToDelete = await _repo.FindByIdAsync(courseId);
+            var courseToDelete = await _genericRepo.FindByIdAsync(courseId);
 
             if (courseToDelete is null) return RedirectToAction(nameof(Index));
 
-            if (await _repo.DeleteAsync(courseToDelete))
+            if (await _genericRepo.DeleteAsync(courseToDelete))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }

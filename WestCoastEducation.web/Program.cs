@@ -13,6 +13,7 @@ builder.Services.AddDbContext<WestCoastEducationContext>(options =>
 //Add dependency injection
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

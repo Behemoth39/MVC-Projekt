@@ -9,8 +9,10 @@ namespace WestCoastEducation.web.Controllers;
 public class UsersAdminController : Controller
 {
     private readonly IUserRepository _repo;
-    public UsersAdminController(IUserRepository repo)
+    public IRepository<UserModel> _genericRepo { get; }
+    public UsersAdminController(IRepository<UserModel> genericRepo, IUserRepository repo)
     {
+        _genericRepo = genericRepo;
         _repo = repo;
     }
 
@@ -18,7 +20,7 @@ public class UsersAdminController : Controller
     {
         try
         {
-            var user = await _repo.ListAllAsync();
+            var user = await _genericRepo.ListAllAsync();
             var model = user.Select(u => new UserListViewModel
             {
                 UserId = u.UserId,
@@ -79,9 +81,9 @@ public class UsersAdminController : Controller
                 TypeOfUser = user.TypeOfUser
             };
 
-            if (await _repo.AddAsync(userToAdd))
+            if (await _genericRepo.AddAsync(userToAdd))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -112,7 +114,7 @@ public class UsersAdminController : Controller
     {
         try
         {
-            var result = await _repo.FindByIdAsync(userId);
+            var result = await _genericRepo.FindByIdAsync(userId);
 
             if (result is null)
             {
@@ -158,7 +160,7 @@ public class UsersAdminController : Controller
         {
             if (!ModelState.IsValid) return View("Edit", user);
 
-            var userToUpdate = await _repo.FindByIdAsync(userId);
+            var userToUpdate = await _genericRepo.FindByIdAsync(userId);
 
             if (userToUpdate is null) return RedirectToAction(nameof(Index));
 
@@ -170,9 +172,9 @@ public class UsersAdminController : Controller
             userToUpdate.Password = user.Password;
             userToUpdate.TypeOfUser = user.TypeOfUser;
 
-            if (await _repo.UpdateAsync(userToUpdate))
+            if (await _genericRepo.UpdateAsync(userToUpdate))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }
@@ -203,13 +205,13 @@ public class UsersAdminController : Controller
     {
         try
         {
-            var userToDelete = await _repo.FindByIdAsync(userId);
+            var userToDelete = await _genericRepo.FindByIdAsync(userId);
 
             if (userToDelete is null) return RedirectToAction(nameof(Index));
 
-            if (await _repo.DeleteAsync(userToDelete))
+            if (await _genericRepo.DeleteAsync(userToDelete))
             {
-                if (await _repo.SaveAsync())
+                if (await _genericRepo.SaveAsync())
                 {
                     return RedirectToAction(nameof(Index));
                 }

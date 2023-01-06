@@ -8,12 +8,15 @@ form {
   border-radius: 10px;
 }
 input {    
-  padding: 10px 10px;
-  margin-bottom: 10px;
+  padding: 10px 10px;  
   text-indent: 10px;
   width: 95%;
   border: 1px solid lightgray;  
   outline: none;  
+}
+.form-spacing
+{
+  margin-bottom: 10px;
 }
 
 

@@ -4,19 +4,21 @@
     ViewBag.Pagetitle = "Courses";
 }
 
-<div>
-    <h1>Kurslista</h1>
-    <p>Här kan det ligga en lista över alla kurser.<br>
-        Just nu ligger det bara en placeholder lista med länkar så länge.
-    </p>
-    <ul>
-        @foreach (var course in Model)
-        {
-            <li>
-                <a asp-action="details" asp-route-courseName="@course.CourseName">
-                    @course.CourseName
-                </a>
-            </li>
-        }
-    </ul>
-</div>
+<section>
+    <div>
+        <h1>Kurslista</h1>
+        <p>Här ska det ligga en lista över alla kurser.<br>
+            Just nu ligger det bara en havlfärdiga länkar så länge.
+        </p>
+        <ul>
+            @foreach (var course in Model)
+            {
+                <li>
+                    <a asp-action="details" asp-route-courseName="@course.CourseName">
+                        @course.CourseName
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>

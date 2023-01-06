@@ -5,11 +5,14 @@ table {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
 }
-label {  
+label {    
   font-weight: bold;
 }
 input{
   cursor: pointer;
+}
+span{  
+  cursor: default;
 }
 thead {  
   background-color: navy;   

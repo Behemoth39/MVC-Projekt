@@ -1,4 +1,3 @@
-@model IList<WestCoastEducation.web.Models.CourseModel>
 @{
     ViewBag.Pagetitle = "Details";
 }
@@ -7,33 +6,5 @@
     <div>
         <h1>Kursinfo</h1>
         <p>Här kommer det fyllas på med mer info senare</p>
-    </div>
-    <div class="table-container">
-        <h1 class="table-h1">Kurser</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Kurs</th>
-                    <th>Kurs Nr</th>
-                    <th>Kurstitel</th>
-                    <th>Kursstart</th>
-                    <th>Kurslängd</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var course in Model)
-                {
-                    <tr>
-                        <td>@course.CourseName</td>
-                        <td>@course.CourseNumber</td>
-                        <td>@course.CourseTitle</td>
-                        <td>@course.CourseStart</td>
-                        <td>@course.CourseLenght Veckor</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
     </div>
 </section>

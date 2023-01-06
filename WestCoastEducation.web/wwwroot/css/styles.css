@@ -5,7 +5,10 @@ body {
 main { 
   margin: auto;
   max-width: 1200px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  align-items: center;  
 }
 ul{
   display: inline-block;

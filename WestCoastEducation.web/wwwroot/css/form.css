@@ -1,32 +1,19 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 600px;
-  max-width: 600px;
-  background: lightgray;
-  padding: 1rem;
-  border-radius: 5px;
+  width: 500px;
+  max-width: 500px;
+  background: silver;
+  padding: 15px;
+  border-radius: 10px;
+}
+input {    
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  text-indent: 10px;
+  width: 95%;
+  border: 1px solid lightgray;  
+  outline: none;  
 }
 
-form label {
-  color: var(--primary-color);
-}
 
-input {
-  padding: 0.6rem 0.2rem;
-}
-
-input[type='text'],
-input[type='number'] {
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid var(--primary-border-color);
-  outline: none !important;
-}
-
-.form-control {
-  margin: 0.2rem 0;
-}
-.form-control label {
-  display: block;
-}

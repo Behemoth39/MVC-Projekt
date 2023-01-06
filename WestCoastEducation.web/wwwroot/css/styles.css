@@ -12,7 +12,8 @@ ul{
   text-align: left;
   margin: 0%;
 }
-ul > a 
+a 
 {
   color: black;  
+  text-decoration: none;
 }

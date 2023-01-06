@@ -23,21 +23,21 @@ public static class SeedData
         }
     }
 
-    /*public static async Task LoadUserData(WestCoastEducationContext context)
+    public static async Task LoadUserData(WestCoastEducationContext context)
     {
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         };
 
-        if (context.Courses.Any()) return;
+        if (context.Users.Any()) return;
         var json = System.IO.File.ReadAllText("Data/Json/users.json");
-        var users = JsonSerializer.Deserialize<List<CourseModel>>(json, options);
+        var users = JsonSerializer.Deserialize<List<UserModel>>(json, options);
 
         if (users is not null && users.Count > 0)
         {
-            await context.Courses.AddRangeAsync(users);
+            await context.Users.AddRangeAsync(users);
             await context.SaveChangesAsync();
         }
-    }*/
+    }
 }

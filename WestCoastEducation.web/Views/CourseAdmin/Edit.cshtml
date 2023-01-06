@@ -3,36 +3,36 @@
     Layout = "_LayoutAdmin";
     ViewBag.Pagetitle = "Admin-panel";
 }
-<section class="page">
-    <h1 class="table-h1">Lägg till kurser</h1>
-    <form class="" asp-action="edit" asp-controller="CourseAdmin" asp-route-courseId=@Model.CourseId method="post">
-        <div class="form-control">
+<section>
+    <h1 class="table-h1">Ändra kurs</h1>
+    <form asp-action="edit" asp-controller="CourseAdmin" asp-route-courseId=@Model.CourseId method="post">
+        <div>
             <label asp-for="CourseName"></label>
             <input asp-for="CourseName">
             <span class="error" asp-validation-for="CourseName"></span>
         </div>
-        <div class="form-control">
+        <div>
             <label asp-for="CourseNumber"></label>
             <input asp-for="CourseNumber">
             <span class="error" asp-validation-for="CourseNumber"></span>
         </div>
-        <div class="form-control">
+        <div>
             <label asp-for="CourseTitle"></label>
             <input asp-for="CourseTitle">
             <span class="error" asp-validation-for="CourseTitle"></span>
         </div>
-        <div class="form-control">
+        <div>
             <label asp-for="CourseStart"></label>
             <input asp-for="CourseStart">
             <span class="error" asp-validation-for="CourseStart"></span>
         </div>
-        <div class="form-control">
+        <div>
             <label asp-for="CourseLenght"></label>
             <input asp-for="CourseLenght">
             <span class="error" asp-validation-for="CourseLenght"></span>
         </div>
-        <div class="form-control">
-            <div class="buttons-container">
+        <div>
+            <div class="buttons">
                 <button type="submit" class="btn-form">Spara</button>
                 <a asp-action="index" asp-controller="CourseAdmin" class="btn-form">Avbryt</a>
             </div>

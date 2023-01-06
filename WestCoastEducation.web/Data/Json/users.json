@@ -1,0 +1,62 @@
+[
+  {
+    "userId": 101,
+    "userName": "KalleHa",
+    "firstName": "Karl",
+    "lastName": "Hansson",
+    "email": "Karl-Hansson@WCE.se",
+    "phone": "0723558917",
+    "password": "!change!",
+    "typeOfUser": "Teacher"
+  },
+  {
+    "userId": 102,
+    "userName": "Annae",
+    "firstName": "Anna",
+    "lastName": "Eriksson",
+    "email": "Anna-Eriksson@WCE.se",
+    "phone": "0723663117",
+    "password": "!change!",
+    "typeOfUser": "Teacher"
+  },
+  {
+    "userId": 103,
+    "userName": "StEna",
+    "firstName": "Sombat",
+    "lastName": "El Nasser",
+    "email": "SombatElNasser@WCE.se",
+    "phone": "0722225917",
+    "password": "!change!",
+    "typeOfUser": "Student"
+  },
+  {
+    "userId": 104,
+    "userName": "HanA",
+    "firstName": "Hanna",
+    "lastName": "Andersson",
+    "email": "Hanna-Andersson@WCE.se",
+    "phone": "0725612217",
+    "password": "!change!",
+    "typeOfUser": "Student"
+  },
+  {
+    "userId": 105,
+    "userName": "JoS",
+    "firstName": "Johan",
+    "lastName": "Svensson",
+    "email": "Johan-Svensson@WCE.se",
+    "phone": "0725544617",
+    "password": "!change!",
+    "typeOfUser": "Student"
+  },
+  {
+    "userId": 106,
+    "userName": "ElBe",
+    "firstName": "Ella",
+    "lastName": "Berg",
+    "email": "Ella-Berg@WCE.se",
+    "phone": "0724147317",
+    "password": "!change!",
+    "typeOfUser": "Student"
+  }
+]

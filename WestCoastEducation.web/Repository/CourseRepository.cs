@@ -11,6 +11,6 @@ public class CourseRepository : Repository<CourseModel>, ICourseRepository
 
     public async Task<CourseModel?> FindByCourseNameAsync(string courseName)
     {
-        return await _context.Courses.SingleOrDefaultAsync(c => c.CourseName.Trim().ToLower() == courseName.Trim().ToLower());
+        return await _context.Course.SingleOrDefaultAsync(c => c.CourseName.Trim().ToLower() == courseName.Trim().ToLower());
     }
 }

@@ -12,7 +12,6 @@ builder.Services.AddDbContext<WestCoastEducationContext>(options =>
 
 //Add dependency injection
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -29,7 +28,6 @@ try
     var context = services.GetRequiredService<WestCoastEducationContext>();
     await context.Database.MigrateAsync();
     await SeedData.LoadCourseData(context);
-    await SeedData.LoadUserData(context);
 }
 catch (Exception ex)
 {

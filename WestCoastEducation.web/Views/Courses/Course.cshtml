@@ -2,8 +2,12 @@
     ViewBag.Pagetitle = "Details";
 }
 <section>
+    <h1>Kursinfo - @Model!.courseName @Model.Model</h1>
     <div>
-        <h1>Kursinfo</h1>
-        <p>Här kommer det fyllas på med mer info senare</p>
+        <p>Kurstitle - @Model.courseTitle</p>
+        <p>Kursnummer - @Model.courseNumber</p>
+        <p>Kursstart - @Model.courseStart</p>
+        <p>Kurslängd - @Model.courseLenght</p>
     </div>
+    <a asp-action="Index">Tillbaka</a>
 </section>

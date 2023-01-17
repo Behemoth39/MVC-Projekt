@@ -24,7 +24,7 @@ public class AccountController : Controller
     {
         var model = new LoginViewModel();
         if (returnUrl is null) returnUrl = "/home";
-        ViewBag.returnUrl = returnUrl; // use Page not ViewBag or you will need this in HttpPost aswell
+        ViewBag.returnUrl = returnUrl; // rewrite to fix Post below
         return View("Login", model);
     }
 
@@ -33,8 +33,8 @@ public class AccountController : Controller
     {
         try
         {
-            if (returnUrl is null) returnUrl = "/home";  // this should not be here 
-            ViewBag.returnUrl = returnUrl;               // this should not be here 
+            if (returnUrl is null) returnUrl = "/home";  // this should have not be here 
+            ViewBag.returnUrl = returnUrl;               // this should have not be here 
 
             if (!ModelState.IsValid) return View(model);
 

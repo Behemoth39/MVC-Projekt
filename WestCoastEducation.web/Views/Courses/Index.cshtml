@@ -12,32 +12,13 @@
             Men när det inte finns något mer kopplat till kurserna än den info som är nu,
             så verkar det onödigt.
         </p>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Kurs</th>
-                        <th>Kurs Nr</th>
-                        <th>Kurstitel</th>
-                        <th>Kursstart</th>
-                        <th>Kurslängd</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var course in Model)
-                    {
-                        <tr>
-                            <td><a asp-action="details" asp-route-courseName="@course.CourseName">
-                                    @course.CourseName
-                                </a></td>
-                            <td>@course.CourseNumber</td>
-                            <td>@course.CourseTitle</td>
-                            <td>@course.CourseStart</td>
-                            <td>@course.CourseLenght Veckor</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <ul>
+            @foreach (var course in Model)
+            {
+                <li><a asp-action="details" asp-route-courseId="@course.CourseId">
+                        @course.CourseName
+                    </a></li>
+            }
+        </ul>
     </div>
 </section>

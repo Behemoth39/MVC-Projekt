@@ -30,10 +30,24 @@ public class CoursesController : Controller
         return View("Index", model);
     }
 
-    [Route("course/{courseName}")] //används ej än
+    [Route("course/{courseId}")] //används ej än
     [Authorize()]
-    public IActionResult Details(string courseName)
+    public async Task<IActionResult> Details(int courseId)
     {
-        return View("course");
+        var course = await _unitOfWork.CourseRepository.FindByIdAsync(courseId);
+
+        if (course is not null)
+        {
+            var model = new CourseViewModel
+            {
+                CourseId = course.CourseId,
+                CourseName = course.CourseName,
+                CourseNumber = course.CourseNumber,
+                CourseTitle = course.CourseTitle,
+                CourseStart = course.CourseStart,
+                CourseLenght = course.CourseLenght
+            };
+        };
+        return View("course", course);
     }
 }

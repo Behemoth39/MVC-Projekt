@@ -24,8 +24,21 @@
                 <div>
                     <a asp-controller="courses" asp-action="Index">Kurser</a>
                 </div>
+                @if (User.Identity.IsAuthenticated == true && User.IsInRole("Admin") || User.IsInRole("Lärare"))
+                {
+                    <div>
+                        <a asp-action="Index" asp-controller="CourseAdmin">Redigera kurser</a>
+                    </div>
+                }
                 <div>
-                    <a asp-action="Index" asp-controller="CourseAdmin">Redigera kurser</a>
+                    @if (User.Identity is null || User.Identity.IsAuthenticated == false)
+                    {
+                        <a asp-action="Login" asp-controller="Account" class="login-btn">Logga in</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Logout" asp-controller="Account" class="login-btn">Logga ut</a>
+                    }
                 </div>
             </div>
             <div class="banner-site-name">

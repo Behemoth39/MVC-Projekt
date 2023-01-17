@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WestCoastEducation.web.Interfaces;
 using WestCoastEducation.web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WestCoastEducation.web.Controllers;
 
@@ -30,6 +31,7 @@ public class CoursesController : Controller
     }
 
     [Route("course/{courseName}")] //används ej än
+    [Authorize()]
     public IActionResult Details(string courseName)
     {
         return View("course");

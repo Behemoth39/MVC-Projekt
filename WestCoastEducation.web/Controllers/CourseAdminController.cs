@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using WestCoastEducation.web.Interfaces;
 using WestCoastEducation.web.Models;
+using WestCoastEducation.web.Interfaces;
 using WestCoastEducation.web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WestCoastEducation.web.Controllers;
 
 [Route("course/admin")]
+[Authorize(Roles = "Admin")]
 public class CourseAdminController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

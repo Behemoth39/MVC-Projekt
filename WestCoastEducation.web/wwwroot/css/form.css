@@ -3,8 +3,7 @@ form {
   flex-direction: column;
   width: 500px;
   max-width: 500px;
-  background: silver;
-  padding: 15px;
+  background: whitesmoke;
   border-radius: 10px;
 }
 input {    
@@ -17,6 +16,9 @@ input {
 .form-spacing
 {
   margin-bottom: 10px;
+}
+.register-account{
+  
 }
 
 

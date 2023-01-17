@@ -30,3 +30,6 @@
 .banner-site-name > p {    
   margin: auto;  
 }
+.login-btn{
+  border-bottom: solid 1px black;
+}
